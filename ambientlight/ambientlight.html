@@ -1,0 +1,66 @@
+<html>
+  <head>
+  <title>Ambient Light</title>
+  <style type="text/css">
+    .night {
+      background-color: black;
+      color: white;
+    }
+
+    .day {
+      background-color: white;
+      color: black;
+    }
+  </style>
+  </head>
+  <body class="day">
+    <p>devicelight</p>
+    Support:
+    <ul>
+      <li>Only Firefox</li>
+      <li>Desktop - Mac OS X only (Windows in progress)</li>
+      <li>Mobile - Firefox Mobile for Android (15.0) and in Firefox OS (B2G)</li>
+    </ul>
+    <p id="feedback">&nbsp;</p>
+    <p>lightlevel</p>
+    <p>Not supportet by major browsers yet</p>
+    <p id="lightlevel">&nbsp;</p>
+
+    <p>There is only the event right now (?). No inital value to get.</p>
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Ambient_Light_Events">https://developer.mozilla.org/en-US/docs/Web/API/Ambient_Light_Events</a>
+
+    <script>
+/// devicelight
+      var feedback = document.getElementById("feedback");
+      if ('ondevicelight' in window) {
+        changeDeviceLight();
+      } else {
+         feedback.innerHTML = "Nooooooooot suppoooooooooorteeeeeeeed :(";
+      }
+
+      function changeDeviceLight() {
+        var threshold = 5;
+        window.addEventListener('devicelight', function(event) {
+          if(event.value < threshold && document.body.className !== "night") {
+            document.body.className = "night";
+          }
+          else if(event.value > threshold && document.body.className !== "day") {
+            document.body.className = "day";
+          }
+          feedback.innerHTML = "The current value of light is " + event.value + " lux.";
+        });
+      }
+
+/// lightlevel
+      if (!('onlightlevel' in window)) {
+          document.getElementById('lightlevel').innerHTML = "No lightlevel for you.";
+       } else {
+          var lightStateValue = document.getElementById('lightlevel');
+
+          window.addEventListener('lightlevel', function(event) {
+             lightStateValue.innerHTML = event.value;
+          });
+       }
+    </script>
+  </body>
+</html>
