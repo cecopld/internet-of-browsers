@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Web Notifications API Demo</title>
+    <style>
+      body
+      {
+        margin: 2em auto;
+        padding: 0 0.5em;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>This is the initial load...</h1>
+    <script>
+      // register service worker
+      navigator.serviceWorker.register('/serviceworker.js', {
+        // define a subset of the website
+        scope: './'
+      }).then(function(reg) {
+        console.log('◕‿◕ ', reg);
+      //  reg.addEventListener("updatefound", function(n) {
+      //    console.log("updated: ",n)
+      //    return _onUpdateFound(reg)
+      //  })
+      }, function(err) {
+        console.log('ಠ_ಠ ', err);
+      });
+
+     //   scope: "./"
+     // }).then(function(e) {
+     //     e.addEventListener("updatefound", function(n) {
+     //         return _onUpdateFound(e)
+     //     })
+     // }), storage.get("last-seen-version").then(function(e) {
+     //     e && t._changelogUi.showLogFrom(e), storage.set("last-seen-version", self.version)
+     // }),
+
+    var _onUpdateFound = function(e) {
+                            var t = this,
+                                n = e.installing;
+                                /*
+                            e.installing.addEventListener("statechange", function(e) {
+                                var r, i, a;
+                                return regeneratorRuntime.async(function(e) {
+                                    for (;;) switch (e.prev = e.next) {
+                                        case 0:
+                                            if ("activated" != n.state || navigator.serviceWorker.controller) {
+                                                e.next = 3;
+                                                break
+                                            }
+                                            return this._toastsUi.show("Ready to work offline", {
+                                                duration: 5e3
+                                            }), e.abrupt("return");
+                                        case 3:
+                                            if ("installed" != n.state || !navigator.serviceWorker.controller) {
+                                                e.next = 17;
+                                                break
+                                            }
+                                            return e.next = 6, regeneratorRuntime.awrap(storage.get("active-version"));
+                                        case 6:
+                                            if (r = e.sent, !r || r.split(".")[0] == self.version.split(".")[0]) {
+                                                e.next = 9;
+                                                break
+                                            }
+                                            return e.abrupt("return");
+                                        case 9:
+                                            if (this._userHasInteracted) {
+                                                e.next = 12;
+                                                break
+                                            }
+                                            return location.reload(), e.abrupt("return");
+                                        case 12:
+                                            return i = this._toastsUi.show("Update available", {
+                                                buttons: ["reload", "dismiss"]
+                                            }), e.next = 15, regeneratorRuntime.awrap(i.answer);
+                                        case 15:
+                                            a = e.sent, "reload" == a && location.reload();
+                                        case 17:
+                                        case "end":
+                                            return e.stop()
+                                    }
+                                }, null, t)
+                            })
+                            */
+                        }
+    </script>
+  </body>
+</html>
+
